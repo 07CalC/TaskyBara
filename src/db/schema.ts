@@ -6,6 +6,7 @@ import {
   primaryKey,
   integer,
   serial,
+  uuid,
 } from "drizzle-orm/pg-core";
 import { drizzle } from "drizzle-orm/node-postgres";
 import type { AdapterAccount } from "next-auth/adapters";
@@ -94,6 +95,14 @@ export const tasks = pgTable("tasks", {
   priority: integer("priority").default(1).notNull(),
   dueDate: timestamp("due_date"),
   isCompleted: boolean("is_completed").default(false).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const recentActivities = pgTable("recent_activities", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  action: text("action").notNull(), // e.g., "Task added", "Project created"
+  details: text("details"), // Optional, e.g., task name
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

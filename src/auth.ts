@@ -39,7 +39,7 @@ export const authConfig = {
     //   }
     // }, 
     redirect: async ({ url, baseUrl }) => {
-      return baseUrl + '/dashboard'
+      return baseUrl + '/console/dashboard'
     },
   }
 } satisfies NextAuthConfig

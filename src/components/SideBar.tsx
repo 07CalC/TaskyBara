@@ -11,10 +11,10 @@ export const SideBar = async () => {
     const session = await auth()
     return (
         <div className="w-full h-full flex flex-col items-center">
-            <div className="py-4 flex items-center w-full justify-between gapy-x-4 px-2">
+            <div className="py-4 flex items-center w-full justify-start gapy-x-4 px-2">
                 <Logo />
                 <p className="text-2xl dark:text-white text-black font-bold">TaskyBara</p>
-                <ThemeToggleButton/>
+                
             </div>
             <div className="w-full">
                 <SideBarRoutes/>
