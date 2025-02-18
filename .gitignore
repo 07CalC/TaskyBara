@@ -34,6 +34,7 @@ yarn-error.log*
 .env
 .env.local
 
+
 # vercel
 .vercel
 
@@ -42,3 +43,4 @@ yarn-error.log*
 next-env.d.ts
 
 .npmrc
+/.vscode/
