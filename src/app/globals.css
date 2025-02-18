@@ -9,6 +9,10 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.sidebar {
+  transition: transform 0.3s ease-in-out;
+}
 body * {
   @apply transition-colors duration-300;
 }

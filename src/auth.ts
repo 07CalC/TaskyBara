@@ -20,24 +20,7 @@ export const authConfig = {
       session.user.id = token.sub!
       return session
     },
-    // signIn: async({ user: userProvider, account, profile }) => {
-    //   try{
-    //     if(account?.provider === "google" || account?.provider === "github"){
-    //       setUser({
-    //         id: userProvider.id,
-    //         name: userProvider?.name ?? "",
-    //         email: userProvider?.email ?? "",
-    //         image: userProvider?.image ?? ""
-    //       })
-    //       return true
-    //     }
-    //     return false
-    //   }
 
-    //   catch (error: AuthError | any) {
-    //     throw new AuthError("failed to sign in", error)
-    //   }
-    // }, 
     redirect: async ({ url, baseUrl }) => {
       return baseUrl + '/console/dashboard'
     },

@@ -6,11 +6,9 @@ import {
   primaryKey,
   integer,
   serial,
-  uuid,
 } from "drizzle-orm/pg-core";
 import { drizzle } from "drizzle-orm/node-postgres";
 import type { AdapterAccount } from "next-auth/adapters";
-import { relations } from "drizzle-orm";
 
 export const db = drizzle(process.env.DATABASE_URL!);
 
@@ -81,7 +79,9 @@ export const authenticators = pgTable(
 
 export const projects = pgTable("projects", {
   id: serial("id").primaryKey(),
-  userId: text("user_id").references(() => users.id, { onDelete: "cascade" }).notNull(),
+  userId: text("user_id")
+    .references(() => users.id, { onDelete: "cascade" })
+    .notNull(),
   name: text("name").notNull(),
   description: text("description"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
@@ -89,27 +89,25 @@ export const projects = pgTable("projects", {
 
 export const tasks = pgTable("tasks", {
   id: serial("id").primaryKey(),
-  projectId: integer("project_id").references(() => projects.id, { onDelete: "cascade" }).notNull(),
+  projectId: integer("project_id")
+    .references(() => projects.id, { onDelete: "cascade" })
+    .notNull(),
+  userId: text("user_id").notNull(),
   title: text("title").notNull(),
   description: text("description"),
-  priority: integer("priority").default(1).notNull(),
-  dueDate: timestamp("due_date"),
+  priority: text("priority").notNull(),
+  dueDate: text("due_date").notNull(),
   isCompleted: boolean("is_completed").default(false).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+("added a task");
 
 export const recentActivities = pgTable("recent_activities", {
   id: serial("id").primaryKey(),
-  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
   action: text("action").notNull(), // e.g., "Task added", "Project created"
   details: text("details"), // Optional, e.g., task name
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
-
-export const projectRelations = relations(projects, ({ many, one }) => ({
-  tasks: many(tasks),
-  user: one(users, {
-    fields: [projects.userId],
-    references: [users.id],
-  }),
-}));
