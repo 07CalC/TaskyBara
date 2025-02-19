@@ -13,13 +13,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  session,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-  session: any;
-}>) {
+}) {
   return (
-    <SessionProvider session={session}>
+    <SessionProvider>
       <html lang="en">
         <body>
           <Toaster position="bottom-left" />

@@ -1,8 +1,7 @@
 import type { NextAuthConfig } from "next-auth"
-import NextAuth, { AuthError } from "next-auth"
+import NextAuth from "next-auth"
 import Google from "next-auth/providers/google"
-import { db, users } from "./db/schema"
-import Github from "next-auth/providers/github"
+import { db } from "./db/schema"
 import { DrizzleAdapter } from "@auth/drizzle-adapter"
 
 
@@ -21,7 +20,7 @@ export const authConfig = {
       return session
     },
 
-    redirect: async ({ url, baseUrl }) => {
+    redirect: async ({ baseUrl }) => {
       return baseUrl + '/console/dashboard'
     },
   }
@@ -31,4 +30,4 @@ export const {
   handlers, 
   auth, 
   signOut 
-} = NextAuth(authConfig)
+} = NextAuth({...authConfig, trustHost: true})

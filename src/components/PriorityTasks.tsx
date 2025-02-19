@@ -3,7 +3,7 @@ import { desc, eq } from "drizzle-orm";
 import { NotFound } from "./NotFound";
 import Link from "next/link";
 import { auth } from "@/auth";
-import { Project, Task } from "@/types/types";
+import { Task } from "@/types/types";
 
 export const PriorityTasks = async () => {
   const session = await auth();

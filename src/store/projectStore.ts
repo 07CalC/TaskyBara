@@ -7,5 +7,5 @@ type ProjectStore = {
 
 export const useProjectStore = create<ProjectStore>((set) => ({
   localProjects: [],
-  setLocalProjects: (project) => set((state) => ({ localProjects: project })),
+  setLocalProjects: (project) => set({ localProjects: project }),
 }));

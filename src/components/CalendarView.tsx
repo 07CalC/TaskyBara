@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import {
   format,
   startOfMonth,
@@ -8,20 +7,21 @@ import {
   endOfWeek,
   addDays,
   isSameDay,
-  addMonths,
-  subMonths,
 } from "date-fns";
-import { useTaskStore } from "@/store/tasksStore";
 import { Task } from "@/types/types";
+import { CalendarMonthNav } from "./CalendarMonthNav";
 
-export const CalendarView = () => {
-  const tasks: Task[] = useTaskStore((state) => state.localTasks);
-  const [currentMonth, setCurrentMonth] = useState(new Date());
+type props ={
+  tasks: Task[]
+  currentMonth: Date
+  setCurrentMonth: (date: Date) => void
+}
+
+const CalendarView = ({tasks, currentMonth, setCurrentMonth}: props) => {
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(monthStart);
   const startDate = startOfWeek(monthStart);
   const endDate = endOfWeek(monthEnd);
-
   const days = [];
   let day = startDate;
 
@@ -32,23 +32,7 @@ export const CalendarView = () => {
 
   return (
     <div className="w-full p-4">
-      <div className="flex justify-between items-center mb-4">
-        <button
-          onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}
-          className="p-2 bg-secondaryLight dark:bg-primaryDark rounded-xl"
-        >
-          &lt; Prev
-        </button>
-        <h2 className="text-xl font-bold">
-          {format(currentMonth, "MMMM yyyy")}
-        </h2>
-        <button
-          onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
-          className="p-2 bg-secondaryLight dark:bg-primaryDark rounded-xl"
-        >
-          Next &gt;
-        </button>
-      </div>
+      <CalendarMonthNav currentMonth={currentMonth} setCurrentMonth={setCurrentMonth} />
 
       <div className="hidden md:grid grid-cols-7 gap-2 border-t border-gray-300">
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
@@ -76,7 +60,7 @@ export const CalendarView = () => {
               {tasksForDay.map((task, index) => (
                 <span
                   key={index}
-                  className="text-xs bg-blue-200 dark:bg-blue-900 px-2 py-1 rounded mt-1"
+                  className={`text-xs ${task.isCompleted ? "line-through bg-green-400 dark:bg-green-800" : "bg-blue-400 dark:bg-blue-800"} ${task.priority === "high" && !task.isCompleted ? "bg-red-400 dark:bg-red-800" : task.priority === "medium" && !task.isCompleted ? "bg-yellow-400 dark:bg-yellow-800" : task.priority === "low" && !task.isCompleted ? "bg-blue-400 dark:bg-blue-800" : ""}  px-2 py-1 rounded mt-1`}
                 >
                   {task.title}
                 </span>
@@ -105,13 +89,8 @@ export const CalendarView = () => {
                 >
                   {format(date, "d")}
                 </span>
-                {tasksForDay.map((task, index) => (
-                  <span
-                    key={index}
-                    className="text-xs bg-blue-200 dark:bg-blue-900 px-2 py-1 rounded mt-1"
-                  >
-                    {task.title}
-                  </span>
+                {tasksForDay.map((task, taskIndex) => (
+                  <div key={taskIndex}>{task.title}</div>
                 ))}
               </div>
             );
@@ -121,3 +100,5 @@ export const CalendarView = () => {
     </div>
   );
 };
+
+export { CalendarView };

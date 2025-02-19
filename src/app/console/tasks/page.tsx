@@ -8,19 +8,19 @@ import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 
 
-
 export default function Dashboard() {
+    const localTasks: Task[] = useTaskStore(state => state.localTasks)
     const session = useSession()
     if(!session) redirect('/login')
-    const localTasks: Task[] = useTaskStore(state => state.localTasks)
     return(
         <div className="w-full h-full flex flex-col p-4 gap-y-4 ">
+
             <PageHeader title="Tasks" />
-            {localTasks.length === 0 &&
+            {localTasks === undefined || localTasks.length === 0 ? (
                 <NotFound title="No Tasks Found" />
-            }
-            {localTasks.length !== 0 &&
+            ) : (localTasks.length !== 0 &&
                 <TasksList />
+            )
             }
         </div>
 )

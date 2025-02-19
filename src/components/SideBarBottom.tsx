@@ -7,7 +7,7 @@ export const SideBarBottom = () => {
     <div className="flex justify-between rounded-xl absolute bottom-3 w-11/12 items-center p-3 bg-primaryLight dark:bg-secondaryDark">
       <div className="flex items-center gap-2">
         <img
-          src={session?.data?.user.image!}
+          src={session?.data?.user.image || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzpzUNv9qA3cFClEHviZm_q15GTVkF21NuYA&s'}
           alt="Profile"
           width={100}
           height={100}

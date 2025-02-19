@@ -1,5 +1,5 @@
 "use client";
-import { fetchAllData } from "@/store/fetchAllData";
+import { useFetchAllData } from "@/store/fetchAllData";
 import { useRouteStore } from "@/store/routeStore";
 import Link from "next/link";
 
@@ -7,7 +7,7 @@ export const SideBarRoutes = () => {
   const route = useRouteStore((state) => state.path);
   const setRoute = useRouteStore((state) => state.setPath);
   const setShowMenu = useRouteStore((state) => state.setShowMenu);
-  fetchAllData();
+  useFetchAllData();
   return (
     <div className="w-full flex flex-col px-5">
       <div className="self-start text-start w-full flex flex-col gap-y-4 ">

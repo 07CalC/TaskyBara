@@ -1,14 +1,19 @@
-import { auth } from "@/auth";
-import { drizzle } from "drizzle-orm/node-postgres";
-
+import CTASection from "@/components/CTA";
+import { Features } from "@/components/Features";
+import Footer from "@/components/Footer";
+import { HeroSection } from "@/components/HeroSection";
+import { MainHeadder } from "@/components/MainHeader";
 
 export default async function Home() {
-  const session = await auth()
 
   return (
 
-    <div className="bg-blue-500 p-4">
-      <h1>Home</h1>
+    <div className="w-full flex flex-col items-center bg-secondaryLight dark:bg-primaryDark min-h-screen h-full">
+      <MainHeadder />
+      <HeroSection />
+      <Features />
+      <CTASection />
+      <Footer />
     </div>
   );
 }

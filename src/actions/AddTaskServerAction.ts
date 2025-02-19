@@ -12,9 +12,9 @@ export const addTask = async (formData: FormData) => {
       title: formData.get("taskName") as string,
       description: formData.get("taskDescription") as string,
       priority: formData.get("priority") as string,
-      dueDate: new Date(formData.get("dueDate") as string),
+      dueDate: formData.get("dueDate") as string,
       userId: session.user.id,
-      projectId: formData.get("projectId") as string,
+      projectId: Number(formData.get("projectId")),
     });
     await db.insert(recentActivities).values({
       userId: session.user.id,

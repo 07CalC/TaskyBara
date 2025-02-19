@@ -100,7 +100,6 @@ export const tasks = pgTable("tasks", {
   isCompleted: boolean("is_completed").default(false).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
-("added a task");
 
 export const recentActivities = pgTable("recent_activities", {
   id: serial("id").primaryKey(),
