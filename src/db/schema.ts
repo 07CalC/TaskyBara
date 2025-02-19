@@ -10,6 +10,7 @@ import {
 import { drizzle } from "drizzle-orm/node-postgres";
 import type { AdapterAccount } from "next-auth/adapters";
 
+
 export const db = drizzle(process.env.DATABASE_URL!);
 
 export const users = pgTable("user", {

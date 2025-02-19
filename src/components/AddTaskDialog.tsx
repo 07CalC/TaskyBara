@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import { AddTaskDialogProjectSelectList } from "./AddTaskDialogProjectSelectList";
 import { addTask } from "../actions/AddTaskServerAction";
+import { SubmitButton } from "./SubmitButton";
 
 export const AddTaskDialog = () => {
   return (
@@ -63,12 +64,13 @@ export const AddTaskDialog = () => {
               className="p-2 rounded-xl bg-secondaryLight dark:bg-primaryDark border border-black dark:border-white self-end"
             />
           </div>
-          <button
+          {/* <button
             type="submit"
             className="bg-black dark:bg-white p-2 rounded-xl text-white dark:text-black"
           >
             Add Tasks
-          </button>
+          </button> */}
+          <SubmitButton text="Add Task" />
         </form>
       </DialogContent>
     </Dialog>

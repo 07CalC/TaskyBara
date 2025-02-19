@@ -9,7 +9,6 @@ import { Suspense } from "react";
 export default async function Dashboard() {
   const session = await auth();
   if (!session) return redirect("/login");
-
   return (
     <div className="w-full h-full flex flex-col p-4 gap-y-4">
       <PageHeader title="Dashboard" />

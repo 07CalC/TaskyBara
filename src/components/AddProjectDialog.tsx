@@ -6,6 +6,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { SubmitButton } from "./SubmitButton";
 
 export const AddProjectDialog = () => {
   return (
@@ -32,12 +33,13 @@ export const AddProjectDialog = () => {
             name="projectDescription"
             className="p-2 rounded-xl bg-secondaryLight dark:bg-primaryDark border border-black dark:border-white"
           />
-          <button
+          {/* <button
             type="submit"
             className="bg-black dark:bg-white p-2 rounded-xl text-white dark:text-black"
           >
             Add Project
-          </button>
+          </button> */}
+          <SubmitButton text="Add Project" />
         </form>
       </DialogContent>
     </Dialog>
